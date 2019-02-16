@@ -26,6 +26,15 @@ class MERCER:
         # Alert all set
         self.log("System Loaded.")
 
+    ## Exit Protocol
+    def exitMercer(self):
+        # Save dictionary to file
+        with open(DICTIONARY_FILE,"w") as brainFile:
+            brainFile.write(json.dumps(self.dictionary, indent = 4))
+
+        # Report exit
+        self.log("Mercer ready to close.")
+
     ## Functional Methods
     # Establish the JSON formatted brain data
     def establishBrain(self):
@@ -88,20 +97,20 @@ class MERCER:
     # Learn the word's relationship
     def learnWordRelation(self,leadingWord,word,trailingWord):
         # Check for leading word to add
-        leadText = ""
+        leadText = None
         if leadingWord != NONE_TAG:
-            leadText = '{"word": '+leadingWord+', "occurances": 1}'
+            leadText = {"word": leadingWord, "occurances": 1}
         
         # Check for trailing word to add
-        trailText = ""
+        trailText = None
         if trailingWord != NONE_TAG:
-            trailText = '{"word": '+trailingWord+', "occurances": 1}'
+            trailText = {"word": trailingWord, "occurances": 1}
 
         # Look for parent word
         if word in self.dictionary:
             # Word found, add data to current knowlege
             # Check leading text
-            if leadText != "":
+            if leadText != None:
                 # Loop through attachment list
                 index = 0
                 found = False
@@ -123,7 +132,7 @@ class MERCER:
                     self.dictionary[word]["leading"].append(leadText)
 
             # Check trailing text
-            if trailText != "":
+            if trailText != None:
                 # Loop through attachment list
                 index = 0
                 found = False
@@ -142,15 +151,39 @@ class MERCER:
                 # Check if word was found
                 if not found:
                     # Add to dictionary
-                    self.dictionary[word]["trailing"].append(leadText)
+                    self.dictionary[word]["trailing"].append(trailText)
 
         else:
             # Word not found, create new entry
-            wordData = {
-                "type": NONE_TAG,
-                "leading": [leadText],
-                "trailing": [trailText]
-            }
+            wordData = None
+            if leadText == None and trailText == None:
+                # No lead or trail text
+                wordData = {
+                    "type": NONE_TAG,
+                    "leading": [],
+                    "trailing": []
+                }
+            elif leadText == None:
+                # No lead text
+                wordData = {
+                    "type": NONE_TAG,
+                    "leading": [],
+                    "trailing": [trailText]
+                }
+            elif trailText == None:
+                # No trail text
+                wordData = {
+                    "type": NONE_TAG,
+                    "leading": [leadText],
+                    "trailing": []
+                }
+            else:
+                # Trail and Lead text are present
+                wordData = {
+                    "type": NONE_TAG,
+                    "leading": [leadText],
+                    "trailing": [trailText]
+                }
 
             # Add word to dictionary
             self.dictionary[word] = wordData

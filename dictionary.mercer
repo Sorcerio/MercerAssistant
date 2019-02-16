@@ -1,2 +1,82 @@
 {
+    "apples": {
+        "type": "<NONE>",
+        "leading": [],
+        "trailing": [
+            {
+                "word": "can",
+                "occurances": 1
+            },
+            {
+                "word": "can",
+                "occurances": 1
+            }
+        ]
+    },
+    "can": {
+        "type": "<NONE>",
+        "leading": [
+            {
+                "word": "apples",
+                "occurances": 1
+            },
+            {
+                "word": "apples",
+                "occurances": 1
+            }
+        ],
+        "trailing": [
+            {
+                "word": "be",
+                "occurances": 1
+            },
+            {
+                "word": "be",
+                "occurances": 1
+            }
+        ]
+    },
+    "be": {
+        "type": "<NONE>",
+        "leading": [
+            {
+                "word": "can",
+                "occurances": 1
+            },
+            {
+                "word": "can",
+                "occurances": 1
+            }
+        ],
+        "trailing": [
+            {
+                "word": "things",
+                "occurances": 1
+            },
+            {
+                "word": "rocks",
+                "occurances": 1
+            }
+        ]
+    },
+    "things": {
+        "type": "<NONE>",
+        "leading": [
+            {
+                "word": "be",
+                "occurances": 1
+            }
+        ],
+        "trailing": []
+    },
+    "rocks": {
+        "type": "<NONE>",
+        "leading": [
+            {
+                "word": "be",
+                "occurances": 1
+            }
+        ],
+        "trailing": []
+    }
 }

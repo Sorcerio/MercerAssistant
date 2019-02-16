@@ -16,5 +16,8 @@ def main():
     # Log the dictionary
     mercer.logDictionary()
 
+    # Exit the dictionary
+    mercer.exitMercer()
+
 # Execute Main Thread
 main()

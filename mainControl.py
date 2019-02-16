@@ -11,7 +11,7 @@ def main():
     mercer = mercerControl.MERCER()
 
     # Learn test text
-    mercer.learnTextFile("learn/2049.txt")
+    mercer.learnTextFile("learn/test.txt")
 
     # Log the dictionary
     mercer.logDictionary()

@@ -87,21 +87,64 @@ class MERCER:
 
     # Learn the word's relationship
     def learnWordRelation(self,leadingWord,word,trailingWord):
+        # Check for leading word to add
+        leadText = ""
+        if leadingWord != NONE_TAG:
+            leadText = '{"word": '+leadingWord+', "occurances": 1}'
+        
+        # Check for trailing word to add
+        trailText = ""
+        if trailingWord != NONE_TAG:
+            trailText = '{"word": '+trailingWord+', "occurances": 1}'
+
         # Look for parent word
         if word in self.dictionary:
             # Word found, add data to current knowlege
-            i=0
-        else:
-            # Check for leading word to add
-            leadText = ""
-            if leadingWord != NONE_TAG:
-                leadText = '{"word": '+leadingWord+', "commonality": 1}'
-            
-            # Check for trailing word to add
-            trailText = ""
-            if trailingWord != NONE_TAG:
-                trailText = '{"word": '+trailingWord+', "commonality": 1}'
+            # Check leading text
+            if leadText != "":
+                # Loop through attachment list
+                index = 0
+                found = False
+                for part in self.dictionary[word]["leading"]:
+                    # Find the part
+                    if part == leadingWord:
+                        # Set found
+                        found = True
 
+                        # Increase common count
+                        self.dictionary[word]["leading"][index]["occurances"] += 1
+
+                    # Iterate
+                    index += 1
+
+                # Check if word was found
+                if not found:
+                    # Add to dictionary
+                    self.dictionary[word]["leading"].append(leadText)
+
+            # Check trailing text
+            if trailText != "":
+                # Loop through attachment list
+                index = 0
+                found = False
+                for part in self.dictionary[word]["trailing"]:
+                    # Find the part
+                    if part == trailingWord:
+                        # Set found
+                        found = True
+
+                        # Increase common count
+                        self.dictionary[word]["trailing"][index]["occurances"] += 1
+
+                    # Iterate
+                    index += 1
+
+                # Check if word was found
+                if not found:
+                    # Add to dictionary
+                    self.dictionary[word]["trailing"].append(leadText)
+
+        else:
             # Word not found, create new entry
             wordData = {
                 "type": NONE_TAG,

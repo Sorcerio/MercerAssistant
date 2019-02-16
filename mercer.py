@@ -77,6 +77,7 @@ class MERCER:
 
                             # Log information
                             print(str(leadingWord)+", "+word+", "+str(trailingWord))
+                            self.learnWordRelation(leadingWord,word,trailingWord)
 
                             # Iterate
                             wordIndex += 1
@@ -84,10 +85,42 @@ class MERCER:
             # Report file not found
             self.log("'"+file+"' does not exist.")
 
+    # Learn the word's relationship
+    def learnWordRelation(self,leadingWord,word,trailingWord):
+        # Look for parent word
+        if word in self.dictionary:
+            # Word found, add data to current knowlege
+            i=0
+        else:
+            # Check for leading word to add
+            leadText = ""
+            if leadingWord != NONE_TAG:
+                leadText = '{"word": '+leadingWord+', "commonality": 1}'
+            
+            # Check for trailing word to add
+            trailText = ""
+            if trailingWord != NONE_TAG:
+                trailText = '{"word": '+trailingWord+', "commonality": 1}'
+
+            # Word not found, create new entry
+            wordData = {
+                "type": NONE_TAG,
+                "leading": [leadText],
+                "trailing": [trailText]
+            }
+
+            # Add word to dictionary
+            self.dictionary[word] = wordData
+
     ## Assistant Methods
     # Switch the debug mode
     def setDebug(self,isOn):
         self.debugMode = isOn
+
+    # Logs the dictionary to the console
+    def logDictionary(self):
+        # Log the dictionary
+        print(self.dictionary)
 
     # Logs to the console and, if debug is on, to the debug log file
     def log(self,text):

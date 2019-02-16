@@ -13,5 +13,8 @@ def main():
     # Learn test text
     mercer.learnTextFile("learn/2049.txt")
 
+    # Log the dictionary
+    mercer.logDictionary()
+
 # Execute Main Thread
 main()

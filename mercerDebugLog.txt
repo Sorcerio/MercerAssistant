@@ -1,4 +1,0 @@
-Mercer: Initializing.
-Mercer: Initializing.
-Mercer: Initializing.
-Mercer: Loaded.

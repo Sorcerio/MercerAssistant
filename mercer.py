@@ -8,11 +8,12 @@ import json
 DICTIONARY_FILE = "dictionary.mercer" # Name of the dictionary file
 LOG_FILE = "mercerDebugLog.txt" # Name of the Debug log file
 LOG_TAG = "Mercer" # Tag to put before Mercer system messages
+NONE_TAG = "<NONE>" # Tag to denote when a string does not exist
 
 # The MERCER Class structure
 class MERCER:
     ## Constructor
-    def __init__(self,debug = False):
+    def __init__(self, debug = False):
         # Set debug mode
         self.debugMode = debug
 
@@ -26,6 +27,7 @@ class MERCER:
         self.log("System Loaded.")
 
     ## Functional Methods
+    # Establish the JSON formatted brain data
     def establishBrain(self):
         # Check if dictionary exists
         if not os.path.isfile(DICTIONARY_FILE):
@@ -38,7 +40,56 @@ class MERCER:
             # Convert data to JSON
             self.dictionary = json.loads(brainFile.read())
 
+    # Learn a plain text file like .txt or similar
+    def learnTextFile(self, file):
+        # Check if file exists
+        if os.path.isfile(file):
+            # Open and read file
+            with open(file,"r") as fileRead:
+                # Read line by line
+                for line in fileRead:
+                    # Loop through words to clean them
+                    words = []
+                    for wordPunc in line.strip().split(" "):
+                        if wordPunc != "":
+                            words.append(wordPunc.strip(".,;-!?'\"").lower()) # Add more characters as applicable
+
+                    # Make sure it's not empty
+                    if len(words) > 0:
+                        # Establish current word index
+                        wordIndex = 0
+
+                        # Loop through words
+                        for word in words:
+                            # Establish leading words
+                            if wordIndex > 0:
+                                leadingWord = words[wordIndex-1]
+                            else:
+                                # Default
+                                leadingWord = NONE_TAG
+
+                            # Establish trailing words
+                            if (wordIndex+1) < len(words):
+                                trailingWord = words[wordIndex+1]
+                            else:
+                                # Default
+                                trailingWord = NONE_TAG
+
+                            # Log information
+                            print(str(leadingWord)+", "+word+", "+str(trailingWord))
+
+                            # Iterate
+                            wordIndex += 1
+        else:
+            # Report file not found
+            self.log("'"+file+"' does not exist.")
+
     ## Assistant Methods
+    # Switch the debug mode
+    def setDebug(self,isOn):
+        self.debugMode = isOn
+
+    # Logs to the console and, if debug is on, to the debug log file
     def log(self,text):
         # Print to console
         print(LOG_TAG+": "+text)

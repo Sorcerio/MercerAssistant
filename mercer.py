@@ -12,6 +12,7 @@ LOG_TAG = "Mercer" # Tag to put before Mercer system messages
 NONE_TAG = "<NONE>" # Tag to denote when a string does not exist
 MAX_ATTEMPTS = 10 # The maximum amount of attempts for various generations
 MAX_COMMONALITY_DIFFERENCE = 3 # The maximum distance that a word can be from the most common recorded in terms of commonality
+MIN_WORDS_IN_SENTENCE = 4 # The minimum number of words to be used in a sentence
 
 # The MERCER Class structure
 class MERCER:
@@ -190,6 +191,34 @@ class MERCER:
             # Add word to dictionary
             self.dictionary[word] = wordData
 
+    # Writes a specific length text block from dictionary
+    def writeText(self,textLength,sentenceMaxLength):
+        # Log
+        self.log("Writing a "+str(textLength)+" text block.")
+
+        # Etablish text block
+        textBlock = ""
+
+        # Write each sentence
+        for sentenceNumber in range(0,textLength):
+            # Choose sentence length
+            sentenceLength = random.randint(MIN_WORDS_IN_SENTENCE,sentenceMaxLength)
+
+            # Write and save sentence
+            textBlock = (textBlock+(self.createSentence(sentenceLength))+"\n")
+
+        # Return text block
+        return textBlock
+
+    # Writes a specific length text block from dictionary to a file. Be sure to include extension in file name
+    def writeTextToFile(self,textLength,sentenceMaxLength,fileName):
+        # Open the file
+        with open(fileName,"w") as outFile:
+            outFile.write(self.writeText(textLength,sentenceMaxLength))
+
+        # Log
+        self.log("Wrote text to '"+str(fileName)+"'.")
+
     # Writes a sentence using Mercer's loaded dictionary
     def createSentence(self,maxLength):
         # Log sentence creation
@@ -222,7 +251,7 @@ class MERCER:
         self.log("Sentence created.")
 
         # Return sentence
-        return sentence
+        return (sentence.capitalize()+".")
 
     # Attempts to find a word that follows the leading word
     def chooseWordToFollow(self,leadingWord):

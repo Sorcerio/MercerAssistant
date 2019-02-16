@@ -18,7 +18,7 @@ def main():
     # mercer.logDictionary()
 
     # Write a sentence
-    print(mercer.createSentence(7))
+    mercer.writeTextToFile(7,7,"testText.txt")
 
     # Exit the dictionary
     mercer.exitMercer()

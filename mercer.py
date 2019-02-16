@@ -116,7 +116,7 @@ class MERCER:
                 found = False
                 for part in self.dictionary[word]["leading"]:
                     # Find the part
-                    if part == leadingWord:
+                    if part["word"] == leadingWord:
                         # Set found
                         found = True
 
@@ -138,7 +138,7 @@ class MERCER:
                 found = False
                 for part in self.dictionary[word]["trailing"]:
                     # Find the part
-                    if part == trailingWord:
+                    if part["word"] == trailingWord:
                         # Set found
                         found = True
 

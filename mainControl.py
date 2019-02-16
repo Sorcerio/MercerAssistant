@@ -13,6 +13,7 @@ def main():
     # Learn test text
     mercer.learnTextFile("learn/test.txt")
     mercer.learnTextFile("learn/2049.txt")
+    mercer.learnTextFile("learn/PrideAndPrejudice.txt")
 
     # # Log the dictionary
     # mercer.logDictionary()

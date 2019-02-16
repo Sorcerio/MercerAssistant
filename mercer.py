@@ -233,6 +233,8 @@ class MERCER:
         # Add seed to sentence
         sentence = seed
 
+        # TODO: Add code to take into account MAX_COMMONALITY_DIFFERENCE to avoid only using the most common word
+
         # Attempt to reach max length of words
         lastWord = seed
         for currentWord in range(0,(maxLength-1)):

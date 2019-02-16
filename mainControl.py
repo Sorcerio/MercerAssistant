@@ -14,8 +14,11 @@ def main():
     mercer.learnTextFile("learn/test.txt")
     mercer.learnTextFile("learn/2049.txt")
 
-    # Log the dictionary
-    mercer.logDictionary()
+    # # Log the dictionary
+    # mercer.logDictionary()
+
+    # Write a sentence
+    print(mercer.createSentence(7))
 
     # Exit the dictionary
     mercer.exitMercer()

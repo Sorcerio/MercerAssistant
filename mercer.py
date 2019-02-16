@@ -3,12 +3,15 @@
 # Imports
 import os
 import json
+import random
 
 # Constants
 DICTIONARY_FILE = "dictionary.mercer" # Name of the dictionary file
 LOG_FILE = "mercerDebugLog.txt" # Name of the Debug log file
 LOG_TAG = "Mercer" # Tag to put before Mercer system messages
 NONE_TAG = "<NONE>" # Tag to denote when a string does not exist
+MAX_ATTEMPTS = 10 # The maximum amount of attempts for various generations
+MAX_COMMONALITY_DIFFERENCE = 3 # The maximum distance that a word can be from the most common recorded in terms of commonality
 
 # The MERCER Class structure
 class MERCER:
@@ -187,6 +190,60 @@ class MERCER:
             # Add word to dictionary
             self.dictionary[word] = wordData
 
+    # Writes a sentence using Mercer's loaded dictionary
+    def createSentence(self,maxLength):
+        # Log sentence creation
+        self.log("Creating sentence.")
+
+        # Create sentence variable
+        sentence = ""
+
+        # Pick seed word
+        seed = list(self.dictionary.keys())[random.randint(0,len(self.dictionary))]
+
+        # Add seed to sentence
+        sentence = seed
+
+        # Attempt to reach max length of words
+        lastWord = seed
+        for currentWord in range(0,(maxLength-1)):
+            # Attempt for max attempts
+            for attempts in range(0,MAX_ATTEMPTS):
+                # Pick word to follow
+                newWord = self.chooseWordToFollow(lastWord)
+
+                # Check if word was found
+                if newWord != NONE_TAG and newWord != None:
+                    # Add to sentence
+                    sentence = (sentence+" "+newWord)
+                    lastWord = newWord
+
+        # Log finish
+        self.log("Sentence created.")
+
+        # Return sentence
+        return sentence
+
+    # Attempts to find a word that follows the leading word
+    def chooseWordToFollow(self,leadingWord):
+        # Check if word is present in dictionary
+        if leadingWord in self.dictionary:
+            # Choose random trailing word
+            highestCommonality = 0
+            mostCommon = None
+            for part in self.dictionary[leadingWord]["trailing"]:
+                # Check what's the most common
+                if part["occurances"] > highestCommonality:
+                    # Set most common word
+                    highestCommonality = part["occurances"]
+                    mostCommon = part["word"]
+
+            # Return most common word
+            return mostCommon
+        else:
+            # Word not present
+            return NONE_TAG
+
     ## Assistant Methods
     # Switch the debug mode
     def setDebug(self,isOn):
@@ -196,6 +253,14 @@ class MERCER:
     def logDictionary(self):
         # Log the dictionary
         print(self.dictionary)
+
+    # Sets the maximum attempts
+    def setMaxGenerationAttempts(self,attempts):
+        # Establish global for change
+        global MAX_ATTEMPTS
+
+        # Set attempts
+        MAX_ATTEMPTS = attempts
 
     # Logs to the console and, if debug is on, to the debug log file
     def log(self,text):

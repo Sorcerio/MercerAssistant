@@ -85,7 +85,6 @@ class MERCER:
                                 trailingWord = NONE_TAG
 
                             # Log information
-                            print(str(leadingWord)+", "+word+", "+str(trailingWord))
                             self.learnWordRelation(leadingWord,word,trailingWord)
 
                             # Iterate

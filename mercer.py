@@ -65,7 +65,7 @@ class MERCER:
                     words = []
                     for wordPunc in line.strip().split(" "):
                         if wordPunc != "":
-                            words.append(wordPunc.strip(".,;-!?'\"").lower()) # Add more characters as applicable
+                            words.append(wordPunc.strip(".,;-!?'\"").strip(u'\u201c').strip(u'\u201d').strip(u'\u201c').strip(u'--').lower()) # Add more characters as applicable
 
                     # Make sure it's not empty
                     if len(words) > 0:

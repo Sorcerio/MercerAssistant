@@ -246,6 +246,7 @@ class MERCER:
                     # Add to sentence
                     sentence = (sentence+" "+newWord)
                     lastWord = newWord
+                    print(lastWord)
 
         # Log finish
         self.log("Sentence created.")
@@ -270,11 +271,16 @@ class MERCER:
                 # Add to the commonality list
                 commonalities[part["occurances"]].append(part["word"])
 
-            # Choose commonality
-            commonKey = random.choice(list(commonalities.keys()))
+            # Return none on Index Errors
+            try:
+                # Choose commonality
+                commonKey = random.choice(list(commonalities.keys()))
 
-            # Pick and return word
-            return commonalities[commonKey][random.randint(0,(len(commonalities[commonKey])-1))]
+                # Pick and return word
+                return commonalities[commonKey][random.randint(0,(len(commonalities[commonKey])-1))]
+            except IndexError as err:
+                # Failed, return None
+                return NONE_TAG
         else:
             # Word not present
             return NONE_TAG

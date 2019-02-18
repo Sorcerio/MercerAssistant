@@ -246,7 +246,9 @@ class MERCER:
                     # Add to sentence
                     sentence = (sentence+" "+newWord)
                     lastWord = newWord
-                    print(lastWord)
+                    
+                    # Break out
+                    break
 
         # Log finish
         self.log("Sentence created.")

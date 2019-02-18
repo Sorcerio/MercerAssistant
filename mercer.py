@@ -233,8 +233,6 @@ class MERCER:
         # Add seed to sentence
         sentence = seed
 
-        # TODO: Add code to take into account MAX_COMMONALITY_DIFFERENCE to avoid only using the most common word
-
         # Attempt to reach max length of words
         lastWord = seed
         for currentWord in range(0,(maxLength-1)):
@@ -259,18 +257,24 @@ class MERCER:
     def chooseWordToFollow(self,leadingWord):
         # Check if word is present in dictionary
         if leadingWord in self.dictionary:
-            # Choose random trailing word
-            highestCommonality = 0
-            mostCommon = None
-            for part in self.dictionary[leadingWord]["trailing"]:
-                # Check what's the most common
-                if part["occurances"] > highestCommonality:
-                    # Set most common word
-                    highestCommonality = part["occurances"]
-                    mostCommon = part["word"]
+            # Prep commonality list
+            commonalities = {}
 
-            # Return most common word
-            return mostCommon
+            # Build word options based on commonalities
+            for part in self.dictionary[leadingWord]["trailing"]:
+                # Check if node already present
+                if part["occurances"] not in commonalities:
+                    # Not present, create the list
+                    commonalities[part["occurances"]] = []
+
+                # Add to the commonality list
+                commonalities[part["occurances"]].append(part["word"])
+
+            # Choose commonality
+            commonKey = random.choice(list(commonalities.keys()))
+
+            # Pick and return word
+            return commonalities[commonKey][random.randint(0,(len(commonalities[commonKey])-1))]
         else:
             # Word not present
             return NONE_TAG

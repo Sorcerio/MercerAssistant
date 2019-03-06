@@ -334,18 +334,13 @@ class MERCER:
         # Ensure globals
         global praw
 
-        # Check praw
-        self.attemptToImportPackage("praw","Reddit features",praw)
-
-    # Generalized repeated code to check and import, if possible, a specific package
-    def attemptToImportPackage(self,name,feature,container):
-        # Check package existence
-        if importlib.util.find_spec(name) != None:
+        # Import praw
+        if importlib.util.find_spec("praw") != None:
             # Import the module
-            importlib.import_module(name)
+            praw = importlib.import_module("praw")
 
             # Report
-            self.log("'"+name+"' was imported. "+feature+" avalible.")
+            self.log("'praw' was imported. Reddit features avalible.")
         else:
             # Report
-            self.log("'"+name+"' was not imported. "+feature+" will be unavalible.")
+            self.log("'praw' was not imported. Reddit features unavalible.")

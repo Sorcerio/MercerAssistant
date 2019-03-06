@@ -7,8 +7,8 @@ import mercer as mercerControl
 
 # Main Thread
 def main():
-    # Startup Mercer
-    mercer = mercerControl.MERCER()
+    # Startup Mercer in Debug Mode
+    mercer = mercerControl.MERCER(True)
 
     # # Learn test text
     # mercer.learnTextFile("learn/test.txt")

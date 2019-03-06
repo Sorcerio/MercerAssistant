@@ -34,7 +34,13 @@ class MERCER:
     def exitMercer(self):
         # Save dictionary to file
         with open(DICTIONARY_FILE,"w") as brainFile:
-            brainFile.write(json.dumps(self.dictionary, indent = 4))
+            # Check debug mode
+            if self.debugMode:
+                # Debug mode, print dictionary fancy
+                brainFile.write(json.dumps(self.dictionary, indent = 4))
+            else:
+                # Not debug mode, print dictionary smaller
+                brainFile.write(json.dumps(self.dictionary))
 
         # Report exit
         self.log("Mercer ready to close.")

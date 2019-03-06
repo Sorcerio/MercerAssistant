@@ -4,6 +4,10 @@
 import os
 import json
 import random
+import importlib
+
+# Optional Imports Setup
+praw = None # For Reddit connections (pip install praw)
 
 # Constants
 DICTIONARY_FILE = "dictionary.mercer" # Name of the dictionary file
@@ -23,6 +27,9 @@ class MERCER:
 
         # Alert startup
         self.log("Initializing.")
+
+        # Check optional Imports
+        self.checkOptionalImports()
 
         # Load brain data
         self.establishBrain()
@@ -321,3 +328,24 @@ class MERCER:
             # Open the debug log file
             with open(LOG_FILE,"a") as logFile:
                 logFile.write(LOG_TAG+": "+text+"\n")
+
+    # Attempts to find and activate optional imports
+    def checkOptionalImports(self):
+        # Ensure globals
+        global praw
+
+        # Check praw
+        self.attemptToImportPackage("praw","Reddit features",praw)
+
+    # Generalized repeated code to check and import, if possible, a specific package
+    def attemptToImportPackage(self,name,feature,container):
+        # Check package existence
+        if importlib.util.find_spec(name) != None:
+            # Import the module
+            importlib.import_module(name)
+
+            # Report
+            self.log("'"+name+"' was imported. "+feature+" avalible.")
+        else:
+            # Report
+            self.log("'"+name+"' was not imported. "+feature+" will be unavalible.")

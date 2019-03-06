@@ -207,7 +207,7 @@ class MERCER:
     # Writes a specific length text block from dictionary
     def writeText(self,textLength,sentenceMaxLength):
         # Log
-        self.log("Writing a "+str(textLength)+" text block.")
+        self.log("Writing a "+str(textLength)+"x"+str(sentenceMaxLength)+" text block.")
 
         # Etablish text block
         textBlock = ""

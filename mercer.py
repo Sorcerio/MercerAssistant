@@ -300,6 +300,25 @@ class MERCER:
             # Word not present
             return NONE_TAG
 
+    # Connect to Reddit via Reddit API and learn words from specified subreddits
+    # requests -> How many requests to execute before finishing the function
+    # subreddit -> The name of the subreddit you want to learn from
+    def learnFromReddit(self,requests,subreddit):
+        # Check if dependencies are loaded
+        if praw != None:
+            # Enter action loop
+            iterations = 0
+            while iterations < requests:
+                # Do stuff
+                print("doing!")
+
+                # Iterate
+                iterations += 1
+
+        else:
+            # praw not imported
+            self.log("'praw' was not imported. Reddit features are disabled.")
+
     ## Assistant Methods
     # Switch the debug mode
     def setDebug(self,isOn):

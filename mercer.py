@@ -300,20 +300,24 @@ class MERCER:
             # Word not present
             return NONE_TAG
 
-    # Connect to Reddit via Reddit API and learn words from specified subreddits
-    # requests -> How many requests to execute before finishing the function
-    # subreddit -> The name of the subreddit you want to learn from
-    def learnFromReddit(self,requests,subreddit):
+    # Connect to Reddit via Reddit API and learn words from specified subreddits.
+    # maxItems -> Max items to read from the subreddit's hot list
+    # subreddit -> The name of the subreddit to search
+    def learnFromReddit(self,maxItems,subreddit):
         # Check if dependencies are loaded
         if praw != None:
-            # Enter action loop
-            iterations = 0
-            while iterations < requests:
-                # Do stuff
-                print("doing!")
+            # Connect to Reddit
+            reddit = praw.Reddit("mercer")
 
-                # Iterate
-                iterations += 1
+            # Connect to subreddit
+            subreddit = reddit.subreddit(subreddit)
+
+            # Loop through fetched submissions
+            for post in subreddit.hot(limit=maxItems):
+                # Info
+                print("Title: "+post.title)
+                print("Body: "+post.selftext)
+                print("Score: "+str(post.score))
 
         else:
             # praw not imported

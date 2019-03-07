@@ -5,6 +5,7 @@ import os
 import json
 import random
 import importlib
+import datetime
 
 # Optional Imports Setup
 praw = None # For Reddit connections (pip install praw)
@@ -370,14 +371,17 @@ class MERCER:
 
     # Logs to the console and, if debug is on, to the debug log file
     def log(self,text):
+        # Build time stamp
+        timeStamp = str(datetime.datetime.now()).split(".")[0]
+
         # Print to console
-        print(LOG_TAG+": "+text)
+        print("("+timeStamp+") "+LOG_TAG+": "+text)
 
         # Check if debug mode
         if self.debugMode:
             # Open the debug log file
             with open(LOG_FILE,"a") as logFile:
-                logFile.write(LOG_TAG+": "+text+"\n")
+                logFile.write("("+timeStamp+") "+LOG_TAG+": "+text+"\n")
 
     # Attempts to find and activate optional imports
     def checkOptionalImports(self):

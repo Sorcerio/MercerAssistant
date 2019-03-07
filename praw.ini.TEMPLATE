@@ -1,4 +1,4 @@
-[mercer]
+[DEFAULT]
 # Praw Parameters
 submission_kind=t3
 subreddit_kind=t5
@@ -13,6 +13,7 @@ reddit_url=https://www.reddit.com
 short_url=https://www.redd.it
 
 # Mercer Definitions
+[mercer]
 client_id=
 client_secret=
 username=

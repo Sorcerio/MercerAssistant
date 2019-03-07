@@ -16,7 +16,7 @@ def main():
     # mercer.learnTextFile("learn/PrideAndPrejudice.txt")
 
     # Learn from Reddit skimming
-    mercer.learnFromReddit(10,"learnPython")
+    mercer.learnFromReddit(10,"story")
 
     # # Log the dictionary
     # mercer.logDictionary()

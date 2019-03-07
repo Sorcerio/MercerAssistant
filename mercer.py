@@ -326,6 +326,9 @@ class MERCER:
     def learnFromReddit(self,maxItems,subreddit):
         # Check if dependencies are loaded
         if praw != None:
+            # Log
+            self.log("Learning using the first "+str(maxItems)+" items from /r/"+subreddit+".")
+
             # Connect to Reddit
             reddit = praw.Reddit("mercer")
 
@@ -339,7 +342,7 @@ class MERCER:
                     # Make sure body isn't empty
                     if post.selftext != None and post.selftext != "":
                         # Learn the words
-                        print("Body: "+post.selftext)
+                        self.learnTextBlock(post.selftext)
                     else:
                         # Log empty thing
                         self.log("'"+post.title+"' had no body text. Ignoring.")

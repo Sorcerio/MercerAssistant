@@ -314,11 +314,15 @@ class MERCER:
 
             # Loop through fetched submissions
             for post in subreddit.hot(limit=maxItems):
-                # Info
-                print("Title: "+post.title)
-                print("Body: "+post.selftext)
-                print("Score: "+str(post.score))
-
+                # Make sure score is good
+                if post.score > 0:
+                    # Make sure body isn't empty
+                    if post.selftext != None and post.selftext != "":
+                        # Learn the words
+                        print("Body: "+post.selftext)
+                    else:
+                        # Log empty thing
+                        self.log("'"+post.title+"' had no body text. Ignoring.")
         else:
             # praw not imported
             self.log("'praw' was not imported. Reddit features are disabled.")

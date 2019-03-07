@@ -74,41 +74,46 @@ class MERCER:
             with open(file,"r") as fileRead:
                 # Read line by line
                 for line in fileRead:
-                    # Loop through words to clean them
-                    words = []
-                    for wordPunc in line.strip().split(" "):
-                        if wordPunc != "":
-                            words.append(wordPunc.strip(".,;-!?'\"").strip(u'\u201c').strip(u'\u201d').strip(u'\u201c').strip(u'--').lower()) # Add more characters as applicable
-
-                    # Make sure it's not empty
-                    if len(words) > 0:
-                        # Establish current word index
-                        wordIndex = 0
-
-                        # Loop through words
-                        for word in words:
-                            # Establish leading words
-                            if wordIndex > 0:
-                                leadingWord = words[wordIndex-1]
-                            else:
-                                # Default
-                                leadingWord = NONE_TAG
-
-                            # Establish trailing words
-                            if (wordIndex+1) < len(words):
-                                trailingWord = words[wordIndex+1]
-                            else:
-                                # Default
-                                trailingWord = NONE_TAG
-
-                            # Log information
-                            self.learnWordRelation(leadingWord,word,trailingWord)
-
-                            # Iterate
-                            wordIndex += 1
+                    # Learn the line
+                    self.learnLine(line)
         else:
             # Report file not found
             self.log("'"+file+"' does not exist.")
+
+    # Splits and learns the line that is fed to the function
+    def learnLine(self,line):
+        # Loop through words to clean them
+        words = []
+        for wordPunc in line.strip().split(" "):
+            if wordPunc != "":
+                words.append(wordPunc.strip(".,;-!?'\"").strip(u'\u201c').strip(u'\u201d').strip(u'\u201c').strip(u'--').lower()) # Add more characters as applicable
+
+        # Make sure it's not empty
+        if len(words) > 0:
+            # Establish current word index
+            wordIndex = 0
+
+            # Loop through words
+            for word in words:
+                # Establish leading words
+                if wordIndex > 0:
+                    leadingWord = words[wordIndex-1]
+                else:
+                    # Default
+                    leadingWord = NONE_TAG
+
+                # Establish trailing words
+                if (wordIndex+1) < len(words):
+                    trailingWord = words[wordIndex+1]
+                else:
+                    # Default
+                    trailingWord = NONE_TAG
+
+                # Log information
+                self.learnWordRelation(leadingWord,word,trailingWord)
+
+                # Iterate
+                wordIndex += 1
 
     # Learn the word's relationship
     def learnWordRelation(self,leadingWord,word,trailingWord):

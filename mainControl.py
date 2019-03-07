@@ -13,10 +13,10 @@ def main():
     # # Learn test text
     # mercer.learnTextFile("learn/test.txt")
     # mercer.learnTextFile("learn/2049.txt")
-    # mercer.learnTextFile("learn/PrideAndPrejudice.txt")
+    mercer.learnTextFile("learn/PrideAndPrejudice.txt")
 
-    # Learn from Reddit skimming
-    mercer.learnFromReddit(10,"story")
+    # # Learn from Reddit skimming
+    # mercer.learnFromReddit(10,"story")
 
     # # Log the dictionary
     # mercer.logDictionary()

@@ -43,3 +43,13 @@ Mercer: Initializing.
 Mercer: 'praw' was imported. Reddit features avalible.
 Mercer: System Loaded.
 Mercer: Mercer ready to close.
+Mercer: Initializing.
+Mercer: 'praw' was imported. Reddit features avalible.
+Mercer: System Loaded.
+Mercer: Initializing.
+Mercer: 'praw' was imported. Reddit features avalible.
+Mercer: System Loaded.
+Mercer: Initializing.
+Mercer: 'praw' was imported. Reddit features avalible.
+Mercer: System Loaded.
+Mercer: Mercer ready to close.

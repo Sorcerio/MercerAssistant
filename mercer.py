@@ -68,6 +68,9 @@ class MERCER:
 
     # Learn a plain text file like .txt or similar
     def learnTextFile(self, file):
+        # Log
+        self.log("Learning '"+file+"'.")
+
         # Check if file exists
         if os.path.isfile(file):
             # Open and read file
@@ -75,12 +78,24 @@ class MERCER:
                 # Read line by line
                 for line in fileRead:
                     # Learn the line
-                    self.learnLine(line)
+                    self.learnTextBlock(line.strip("\n"))
         else:
             # Report file not found
             self.log("'"+file+"' does not exist.")
 
-    # Splits and learns the line that is fed to the function
+    # Splits and learns each sentence from a block of sentences.
+    # *This is generally the function you want to start with when learning text.*
+    def learnTextBlock(self,textBlock):
+        # Split the sentences apart
+        sentences = textBlock.split(".?!")
+
+        # Check if empty
+        if len(sentences) > 0:
+            for sentence in sentences:
+                # Learn the line
+                self.learnLine(sentence)
+
+    # Splits and learns the sentence that is fed to the function.
     def learnLine(self,line):
         # Loop through words to clean them
         words = []

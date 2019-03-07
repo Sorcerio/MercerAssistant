@@ -14,5 +14,6 @@ Allows Mercer to interact (in a read only capacity) with Reddit for learning pur
 1. Install 'praw' with 'pip install praw'.
 2. Go to [Reddit App registration](https://www.reddit.com/prefs/apps/).
 3. Create a new app (likely as a script). Keep the page open.
-4. Fill in the 'client_id' and the 'client_secret' sections, as shown on the Reddit app page, in the 'praw.ini' file.
-5. (Optional) Fill in the 'username' and 'password' sections in the 'praw.ini' file. This is not required for read-only operations.
+4. Fill in the 'client_id' and the 'client_secret' sections, as shown on the Reddit app page, in the 'praw.ini.TEMPLATE' file.
+5. (Optional) Fill in the 'username' and 'password' sections in the 'praw.ini.TEMPLATE' file. This is not required for read-only operations.
+6. Rename the 'praw.ini.TEMPLATE' file to 'praw.ini'.

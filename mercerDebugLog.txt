@@ -43,3 +43,39 @@
 (2019-03-12 12:40:26) Mercer: Creating sentence.
 (2019-03-12 12:40:26) Mercer: Sentence created.
 (2019-03-12 12:40:26) Mercer: Mercer ready to close.
+(2019-03-12 13:37:02) Mercer: Initializing.
+(2019-03-12 13:37:02) Mercer: 'praw' was imported. Reddit features avalible.
+(2019-03-12 13:37:02) Mercer: System Loaded.
+(2019-03-12 13:37:32) Mercer: Initializing.
+(2019-03-12 13:37:32) Mercer: 'praw' was imported. Reddit features avalible.
+(2019-03-12 13:37:32) Mercer: System Loaded.
+(2019-03-12 13:37:47) Mercer: Initializing.
+(2019-03-12 13:37:47) Mercer: 'praw' was imported. Reddit features avalible.
+(2019-03-12 13:37:47) Mercer: System Loaded.
+(2019-03-12 13:38:03) Mercer: Initializing.
+(2019-03-12 13:38:03) Mercer: 'praw' was imported. Reddit features avalible.
+(2019-03-12 13:38:03) Mercer: System Loaded.
+(2019-03-12 13:38:07) Mercer: Mercer ready to close.
+(2019-03-12 13:38:49) Mercer: Initializing.
+(2019-03-12 13:38:49) Mercer: 'praw' was imported. Reddit features avalible.
+(2019-03-12 13:38:49) Mercer: System Loaded.
+(2019-03-12 13:38:55) Mercer: Mercer ready to close.
+(2019-03-12 13:39:38) Mercer: Initializing.
+(2019-03-12 13:39:38) Mercer: 'praw' was imported. Reddit features avalible.
+(2019-03-12 13:39:38) Mercer: System Loaded.
+(2019-03-12 13:40:33) Mercer: Initializing.
+(2019-03-12 13:40:33) Mercer: 'praw' was imported. Reddit features avalible.
+(2019-03-12 13:40:33) Mercer: System Loaded.
+(2019-03-12 13:40:33) Mercer: Mercer ready to close.
+(2019-03-12 13:48:52) Mercer: Initializing.
+(2019-03-12 13:48:52) Mercer: 'praw' was imported. Reddit features avalible.
+(2019-03-12 13:48:52) Mercer: System Loaded.
+(2019-03-12 13:48:52) Mercer: Mercer ready to close.
+(2019-03-12 13:51:22) Mercer: Initializing.
+(2019-03-12 13:51:22) Mercer: 'praw' was imported. Reddit features avalible.
+(2019-03-12 13:51:22) Mercer: System Loaded.
+(2019-03-12 13:51:22) Mercer: Mercer ready to close.
+(2019-03-12 13:55:30) Mercer: Initializing.
+(2019-03-12 13:55:30) Mercer: 'praw' was imported. Reddit features avalible.
+(2019-03-12 13:55:30) Mercer: System Loaded.
+(2019-03-12 13:55:30) Mercer: Mercer ready to close.

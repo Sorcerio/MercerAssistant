@@ -15,6 +15,9 @@ DICTIONARY_FILE = "dictionary.mercer" # Name of the dictionary file
 LOG_FILE = "mercerDebugLog.txt" # Name of the Debug log file
 LOG_TAG = "Mercer" # Tag to put before Mercer system messages
 NONE_TAG = "<NONE>" # Tag to denote when a string does not exist
+ADJ_TAG = "Adj" # Tag to denote when a word is a Adjective
+NOUN_TAG = "Noun" # Tag to denote when a word is a Noun
+VERB_TAG = "Verb" # Tag to denote when a word is a Verb
 MAX_ATTEMPTS = 10 # The maximum amount of attempts for various generations
 MAX_COMMONALITY_DIFFERENCE = 3 # The maximum distance that a word can be from the most common recorded in terms of commonality
 MIN_WORDS_IN_SENTENCE = 4 # The minimum number of words to be used in a sentence
@@ -405,3 +408,61 @@ class MERCER:
         else:
             # Report
             self.log("'praw' was not imported. Reddit features unavalible.")
+
+    # Calculates various statistics about the current dictionary possessed by Mercer
+    # Either handles its own printing, or can be retrieved as a dictionary containing the data
+    # Default functionality is to handle its own printing
+    def getDictionaryStats(self,shouldPrint=True):
+        # Prep word count
+        wordCount = 0
+
+        # Prep most common type
+        typeCounter = {
+            NOUN_TAG: 0,
+            ADJ_TAG: 0,
+            VERB_TAG: 0,
+            NONE_TAG: 0
+        }
+
+        # Loop through dictionary
+        for word in self.dictionary:
+            # Get word type
+            if self.dictionary[word]['type'] in typeCounter:
+                # Iterate count
+                typeCounter[self.dictionary[word]['type']] += 1
+            else:
+                # Add to count
+                typeCounter[self.dictionary[word]['type']] = 0
+
+            # Add word count
+            wordCount += 1
+
+        # Check mode
+        if shouldPrint:
+            # Print mode
+            # Print the data
+            print("Dictionary Statistics:")
+            print("Total Word Count: "+str(wordCount)+",")
+            print("Noun Count: "+str(typeCounter[NOUN_TAG])+",")
+            print("Adjective Count: "+str(typeCounter[ADJ_TAG])+",")
+            print("Verb Count: "+str(typeCounter[VERB_TAG])+",")
+            print("Unknown Count: "+str(typeCounter[NONE_TAG]))
+
+            # Return blank
+            return None
+        else:
+            # Return mode
+            # Translate
+            typeCounter['Nouns'] = typeCounter.pop(NOUN_TAG)
+            typeCounter['Adjectives'] = typeCounter.pop(ADJ_TAG)
+            typeCounter['Verbs'] = typeCounter.pop(VERB_TAG)
+            typeCounter['Unknown'] = typeCounter.pop(NONE_TAG)
+
+            # Build Dictionary
+            outData = {
+                "totalWords": wordCount,
+                "typeCounts": typeCounter
+            }
+
+            # Return data
+            return outData

@@ -16,13 +16,15 @@ def main():
     # mercer.learnTextFile("learn/PrideAndPrejudice.txt")
 
     # Learn from Reddit skimming
-    mercer.learnFromSubReddit(10,"story")
+    # mercer.learnFromSubReddit(10,"story")
 
     # Log the dictionary
     # mercer.logDictionary()
+    # mercer.getDictionaryStats()
+    # print(mercer.getDictionaryStats(False))
 
     # Print sentence
-    print(mercer.createSentence(5))
+    # print(mercer.createSentence(5))
 
     # Write text to file
     # mercer.writeTextToFile(7,7,"testText.txt")

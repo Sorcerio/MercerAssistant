@@ -12,7 +12,7 @@ Do this setup first, then any or all of the other setup options to unlock their 
 1. Download Git Repo.
 2. Ensure Python 3 is installed.
 3. Run 'mainControl.py' to start Mercer.
-4. Experiment with the features avalible and teach Mercer words.
+4. Experiment with the features available and teach Mercer words.
 
 ## Reddit Interaction Setup
 Allows Mercer to interact (in a read only capacity) with Reddit for learning purposes.

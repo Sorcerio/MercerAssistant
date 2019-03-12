@@ -1,6 +1,11 @@
 # Mercer Assistant
 The Mercer Assistant learns text and attempts to write back text, mostly as poetry, in it's current state.
 
+## License
+This program falls under the  Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International license.
+
+[![Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png "Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)")](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+
 ## Setup
 ## Basic Setup
 Do this setup first, then any or all of the other setup options to unlock their features.

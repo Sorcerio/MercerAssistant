@@ -321,14 +321,17 @@ class MERCER:
             # Word not present
             return NONE_TAG
 
-    # Connect to Reddit via Reddit API and learn words from specified subreddits.
+    # Connect to Reddit via Reddit API and learn words from the specified subreddit
     # maxItems -> Max items to read from the subreddit's hot list
     # subreddit -> The name of the subreddit to search
-    def learnFromReddit(self,maxItems,subreddit):
+    def learnFromSubReddit(self,maxItems,subreddit):
         # Check if dependencies are loaded
         if praw != None:
+            # Set name variable
+            subredditName = subreddit
+
             # Log
-            self.log("Learning using the first "+str(maxItems)+" items from /r/"+subreddit+".")
+            self.log("Accessing the first "+str(maxItems)+" items on /r/"+subredditName+".")
 
             # Connect to Reddit
             reddit = praw.Reddit("mercer")
@@ -342,6 +345,10 @@ class MERCER:
                 if post.score > 0:
                     # Make sure body isn't empty
                     if post.selftext != None and post.selftext != "":
+                        # Log
+                        # self.log("Learning from post '"+post.title+"' on /r/"+subredditName+".")
+                        self.log("Learning ~"+str(len(post.selftext.split(" ")))+" words from '"+post.title+"'.")
+
                         # Learn the words
                         self.learnTextBlock(post.selftext)
                     else:

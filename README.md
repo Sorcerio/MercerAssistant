@@ -22,3 +22,7 @@ Allows Mercer to interact (in a read only capacity) with Reddit for learning pur
 4. Fill in the 'client_id' and the 'client_secret' sections, as shown on the Reddit app page, in the 'praw.ini.TEMPLATE' file.
 5. (Optional) Fill in the 'username' and 'password' sections in the 'praw.ini.TEMPLATE' file. This is not required for read-only operations.
 6. Rename the 'praw.ini.TEMPLATE' file to 'praw.ini'.
+
+## Web Interaction Setup
+Allows Mercer to request information from the web generally for learning purposes.
+1. Install 'requests' with 'pip install requests' or 'pipenv install requests'.

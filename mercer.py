@@ -368,10 +368,23 @@ class MERCER:
     def pullRSSFeed(self,link):
         # Check if dependencies are loaded
         if requests != None and elementTree != None:
-            # TODO: Write functionality
+            # Pull XML data
+            data = requests.get(link)
 
-            # Return XML/HTML/etc data for parsing
-            return "TEMP"
+            # Prepare root attempt
+            root = None
+            try:
+                # Try to parse XML
+                root = elementTree.fromstring(data.content)
+
+                # Return XML/HTML/etc data for parsing
+                return root
+            except elementTree.ParseError as err:
+                # Log inability to access
+                self.log("Could not parse XML from '"+str(link)+"'.")
+
+                # Return a failure indicator
+                return None
         else:
             # requests or elementTree are not loaded
             self.log("'requests' was not imported. Web connectivity features unavalible.")
@@ -388,7 +401,7 @@ class MERCER:
         # Check if data is ok
         if feed != None:
             # TODO: Functionality
-            pass
+            print(feed)
 
     ## Assistant Methods
     # Switch the debug mode

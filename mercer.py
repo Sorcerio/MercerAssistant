@@ -6,7 +6,6 @@ import json
 import random
 import importlib
 import datetime
-import re
 
 # Optional Imports Setup
 praw = None # For Reddit connections (pip install praw)

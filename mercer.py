@@ -9,6 +9,8 @@ import datetime
 
 # Optional Imports Setup
 praw = None # For Reddit connections (pip install praw)
+requests = None # For general internet requests (pip install requests [or] pipenv install requests)
+elementTree = None # For parsing XML data (Installed by default in Python 3)
 
 # Constants
 DICTIONARY_FILE = "dictionary.mercer" # Name of the dictionary file
@@ -361,6 +363,16 @@ class MERCER:
             # praw not imported
             self.log("'praw' was not imported. Reddit features are disabled.")
 
+    # Pull the BBC News RSS Feed and skim the articles that are found on it.
+    # maxItems -> Max items to skim. A value of -1 indicates no limit beyond that of the RSS feed's content
+    def learnFromBBCNews(self,maxItems = -1):
+        # Check if dependencies are loaded
+        if requests != None and elementTree != None:
+            pass # TODO: Write functionality
+        else:
+            # requests or elementTree are not loaded
+            self.log("'requests' was not imported. Web connectivity features unavalible.")
+
     ## Assistant Methods
     # Switch the debug mode
     def setDebug(self,isOn):
@@ -397,17 +409,25 @@ class MERCER:
     def checkOptionalImports(self):
         # Ensure globals
         global praw
+        global requests
+        global elementTree
 
         # Import praw
         if importlib.util.find_spec("praw") != None:
             # Import the module
             praw = importlib.import_module("praw")
-
-            # Report
-            self.log("'praw' was imported. Reddit features avalible.")
         else:
             # Report
             self.log("'praw' was not imported. Reddit features unavalible.")
+
+        # Import requests and elementTree
+        if importlib.util.find_spec("requests") != None and importlib.util.find_spec("xml.etree.ElementTree") != None:
+            # Import the modules
+            requests = importlib.import_module("requests")
+            elementTree = importlib.import_module("xml.etree.ElementTree")
+        else:
+            # Report
+            self.log("'requests' was not imported. Web connectivity features unavalible.")
 
     # Calculates various statistics about the current dictionary possessed by Mercer
     # Either handles its own printing, or can be retrieved as a dictionary containing the data

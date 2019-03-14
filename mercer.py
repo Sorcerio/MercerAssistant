@@ -363,15 +363,32 @@ class MERCER:
             # praw not imported
             self.log("'praw' was not imported. Reddit features are disabled.")
 
-    # Pull the BBC News RSS Feed and skim the articles that are found on it.
-    # maxItems -> Max items to skim. A value of -1 indicates no limit beyond that of the RSS feed's content
-    def learnFromBBCNews(self,maxItems = -1):
+    # Accesses and converts to an element tree a specified RSS Feed (or web page)
+    # Returns 'None' if the proper imports are not avalible
+    def pullRSSFeed(self,link):
         # Check if dependencies are loaded
         if requests != None and elementTree != None:
-            pass # TODO: Write functionality
+            # TODO: Write functionality
+
+            # Return XML/HTML/etc data for parsing
+            return "TEMP"
         else:
             # requests or elementTree are not loaded
             self.log("'requests' was not imported. Web connectivity features unavalible.")
+
+            # Return a failure indicator
+            return None
+
+    # Pull the BBC News RSS Feed and skim the articles that are found on it.
+    # maxItems -> Max items to skim. A value of -1 indicates no limit beyond that of the RSS feed's content
+    def learnFromBBCNews(self,maxItems = -1):
+        # Connect to RSS Feed
+        feed = self.pullRSSFeed("http://feeds.bbci.co.uk/news/rss.xml")
+
+        # Check if data is ok
+        if feed != None:
+            # TODO: Functionality
+            pass
 
     ## Assistant Methods
     # Switch the debug mode

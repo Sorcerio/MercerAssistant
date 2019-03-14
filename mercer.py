@@ -6,6 +6,7 @@ import json
 import random
 import importlib
 import datetime
+import re
 
 # Optional Imports Setup
 praw = None # For Reddit connections (pip install praw)
@@ -394,14 +395,37 @@ class MERCER:
 
     # Pull the BBC News RSS Feed and skim the articles that are found on it.
     # maxItems -> Max items to skim. A value of -1 indicates no limit beyond that of the RSS feed's content
-    def learnFromBBCNews(self,maxItems = -1):
-        # Connect to RSS Feed
-        feed = self.pullRSSFeed("http://feeds.bbci.co.uk/news/rss.xml")
+    # def learnFromBBCNews(self,maxItems = -1):
+    #     # Connect to RSS Feed
+    #     feed = self.pullRSSFeed("http://feeds.bbci.co.uk/news/rss.xml")
 
-        # Check if data is ok
-        if feed != None:
-            # TODO: Functionality
-            print(feed)
+    #     # Check if imports and data are ok
+    #     if feed != None:
+    #         # Loop through returned items
+    #         i = 0
+    #         for item in feed.find("channel").findall("item"):
+    #             # Check if limit met
+    #             if maxItems == -1 or i < maxItems:
+    #                 # Pull title and link
+    #                 itemTitle = item.find("title").text.lstrip("<![CDATA[").rstrip("]]>")
+    #                 itemLink = item.find("guid").text
+    #                 print(itemTitle,itemLink)
+
+    #                 # Attempt to open article
+    #                 # TODO: Try and fix the parsing of the website
+    #                 article = self.pullRSSFeed(itemLink)
+
+    #                 # Check if bad data
+    #                 if article != None:
+    #                     # Log
+    #                     self.log("Learning from '"+itemTitle+"' on BBC.")
+
+    #                     # Loop through paragraph elements in the article
+    #                     for p in article.find("body").find("div[@class='direction']").find("div[@id='orb-modules']").find("div[@id='site-container']").find("div[@id='page']").find("div[@role='main']").find("div[@class='container']").find("div[@class='container--primary-and-secondary-columns']").find("div[@class='column--primary']").find("div[@class='story-body']").find("div[@class='story-body__inner']").findall("p"):
+    #                         print(p.text)
+                    
+    #                 # Iterate
+    #                 i += 1
 
     ## Assistant Methods
     # Switch the debug mode

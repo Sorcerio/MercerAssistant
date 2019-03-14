@@ -18,9 +18,6 @@ def main():
     # Learn from Reddit skimming
     # mercer.learnFromSubReddit(10,"story")
 
-    # Learn from RSS Feed skimming
-    mercer.learnFromBBCNews()
-
     # Log the dictionary
     # mercer.logDictionary()
     # mercer.getDictionaryStats()

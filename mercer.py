@@ -6,6 +6,7 @@ import os
 import json
 import random
 import importlib
+from importlib import util as importlibutil
 import datetime
 
 # Optional Imports Setup
@@ -479,7 +480,7 @@ class MERCER:
         global elementTree
 
         # Import praw
-        if importlib.util.find_spec("praw") != None:
+        if importlibutil.find_spec("praw") != None:
             # Import the module
             praw = importlib.import_module("praw")
         else:
@@ -487,7 +488,7 @@ class MERCER:
             self.log("'praw' was not imported. Reddit features unavalible.")
 
         # Import requests and elementTree
-        if importlib.util.find_spec("requests") != None and importlib.util.find_spec("xml.etree.ElementTree") != None:
+        if importlibutil.find_spec("requests") != None and importlibutil.find_spec("xml.etree.ElementTree") != None:
             # Import the modules
             requests = importlib.import_module("requests")
             elementTree = importlib.import_module("xml.etree.ElementTree")

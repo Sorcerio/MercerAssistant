@@ -5,11 +5,15 @@ import mercer as mercerControl
 import generalUtilities as utils
 
 # Variables
+MERCER = None
 
 # Main Thread
 def main():
+    # Indicate global
+    global MERCER
+
     # Startup Mercer in specified mode
-    mercer = mercerControl.MERCER(utils.askUserYesNo("Start in Debug Mode?",True))
+    MERCER = mercerControl.MERCER(utils.askUserYesNo("Start in Debug Mode?",True))
 
     # Welcome message
     print("\n<< Welcome to Mercer Main Control >>")
@@ -19,7 +23,10 @@ def main():
     utils.textMenu("Mercer Main Menu",options,"Save and Quit",mainMenuFunctions)
 
     # Exit Mercer safely
-    mercer.exitMercer()
+    MERCER.exitMercer()
+
+    # Safe to exit message
+    print("Mercer has shutdown successfully.\nIt is now safe to close this window.")
 
 # Functions for the main menu
 def mainMenuFunctions(answer):
@@ -39,16 +46,28 @@ def mainMenuFunctions(answer):
 
 # Functions for the learning menu
 def learningMenuFunctions(answer):
+    # Indicate global
+    global MERCER
+
     # Because Python Switch statements don't exist
     if answer == "0":
         # Learn from File process
-        print(answer)
+        # Get filename from user
+        fileName = utils.managedInput("Enter the filename here.","Cancel")
+
+        # Check if response valid
+        if fileName != None:
+            # Learn from the file
+            pass
     elif answer == "1":
         # Learn from Subreddit process
         print(answer)
 
 # Functions for the learning menu
 def generationMenuFunctions(answer):
+    # Indicate global
+    global MERCER
+
     # Because Python Switch statements don't exist
     if answer == "0":
         # Generate Sentece process
@@ -59,6 +78,9 @@ def generationMenuFunctions(answer):
 
 # Functions for the learning menu
 def adminMenuFunctions(answer):
+    # Indicate global
+    global MERCER
+
     # Because Python Switch statements don't exist
     if answer == "0":
         # Log dictionary process

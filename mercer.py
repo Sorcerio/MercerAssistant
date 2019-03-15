@@ -450,14 +450,14 @@ class MERCER:
         # Build time stamp
         timeStamp = str(datetime.datetime.now()).split(".")[0]
 
-        # Print to console
-        print("("+timeStamp+") "+LOG_TAG+": "+text)
+        # Open the log file
+        with open(LOG_FILE,"a") as logFile:
+            logFile.write("("+timeStamp+") "+LOG_TAG+": "+text+"\n")
 
         # Check if debug mode
         if self.debugMode:
-            # Open the debug log file
-            with open(LOG_FILE,"a") as logFile:
-                logFile.write("("+timeStamp+") "+LOG_TAG+": "+text+"\n")
+            # Print to console
+            print("("+timeStamp+") "+LOG_TAG+": "+text)  
 
     # Attempts to find and activate optional imports
     def checkOptionalImports(self):

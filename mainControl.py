@@ -35,15 +35,15 @@ def mainMenuFunctions(answer):
     if answer == "0":
         # Open Learning Menu
         options = ["Learn from File","Learn from Subreddit"]
-        utils.textMenu("Learning Menu",options,"Back",learningMenuFunctions)
+        utils.textMenu("Learning Menu",options,"Back to Main Menu",learningMenuFunctions)
     elif answer == "1":
         # Open Generation Menu
         options = ["Generate Sentence","Write to File"]
-        utils.textMenu("Generation Menu",options,"Back",generationMenuFunctions)
+        utils.textMenu("Generation Menu",options,"Back to Main Menu",generationMenuFunctions)
     elif answer == "2":
         # Open Admin Menu
         options = ["Log Dictionary","Show Dictionary Statistics","Toggle Debug Mode","Set Max Generation Attempts"]
-        utils.textMenu("Administration Menu",options,"Back",adminMenuFunctions)
+        utils.textMenu("Administration Menu",options,"Back to Main Menu",adminMenuFunctions)
 
 # Functions for the learning menu
 def learningMenuFunctions(answer):

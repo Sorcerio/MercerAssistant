@@ -40,7 +40,7 @@ def askUserYesNo(query,boolean = False):
         answer = askUser(query,["Yes","No"])
 
         # Check answer
-        if answer == "yes":
+        if answer.lower() == "yes":
             return True
         else:
             return False

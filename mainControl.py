@@ -120,16 +120,40 @@ def adminMenuFunctions(answer):
     # Because Python Switch statements don't exist
     if answer == "0":
         # Log dictionary process
-        print(answer)
+        # Ask if user is sure
+        print("This is a massive text dump that is often not human readable.")
+        shouldContinue = utils.askUserYesNo("Are you sure you want to continue?",True)
+
+        # Check if should continue
+        if shouldContinue:
+            print(MERCER.logDictionary())
     elif answer == "1":
         # Show dictionary statistics process
-        print(answer)
-    elif answer == "1":
+        MERCER.getDictionaryStats()
+    elif answer == "2":
         # Show toggle debug mode process
-        print(answer)
-    elif answer == "1":
+        # Ask for mode to switch
+        mode = utils.askUserYesNo("Enable Debug Mode?",True)
+
+        # Set the mode
+        MERCER.setDebug(mode)
+        
+        # Choose print
+        if mode:
+            print("Debug Mode has been enabled.")
+        else:
+            print("Debug Mode has been disabled.")
+    elif answer == "3":
         # Show set max generation attempts process
-        print(answer)
+        # Enter number
+        maxNum = utils.managedInputNumber("Set max generation attempts to","Cancel")
+
+        # Check
+        minLimit = 1
+        if maxNum != None and maxNum >= minLimit:
+            MERCER.setMaxGenerationAttempts(maxNum)
+        elif maxNum < minLimit:
+            print(str(minLimit)+" is minimum max generation attempts that can be set.")
 
 # Execute Main Thread
 main()

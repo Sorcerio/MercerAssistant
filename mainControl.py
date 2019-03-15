@@ -14,17 +14,37 @@ def main():
     # Startup Mercer in specified mode
     mercer = mercerControl.MERCER(utils.askUserYesNo("Start in Debug Mode?",True))
 
-    # Establish main loop variables
-    answer = None
-    options = ["Option A","Option B","Option C","Quit"]
-
-    # Enter main loop
-    while answer == None or answer != str(len(options)-1):
-        # Present main menu and wait for input
-        answer = utils.presentTextMenu("Mercer Main Menu",options)      
+    # Enter menu functions
+    options = ["Learning Menu","Generation Menu","Administration Menu"]
+    utils.textMenu("Mercer Main Menu",options,"Save and Quit",mainMenuFunctions)
 
     # Exit Mercer safely
     mercer.exitMercer()
+
+# Functions of the options in the main menu
+def mainMenuFunctions(answer):
+    # Because Python Switch statements don't exist
+    if answer == "0":
+        # Open Learning Menu
+        learningMenu()
+    elif answer == "1":
+        # Open Generation Menu
+        generationMenu()
+    elif answer == "2":
+        # Open Admin Menu
+        adminMenu()
+
+# Ask for information in the Learning Menu
+def learningMenu():
+    print("Learning Menu!")
+
+# Ask for information in the Learning Menu
+def generationMenu():
+    print("Gen Menu!")
+
+# Ask for information in the Learning Menu
+def adminMenu():
+    print("Admin Menu!")
 
 # Execute Main Thread
 main()

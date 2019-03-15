@@ -44,7 +44,7 @@ def askUserYesNo(query,boolean = False):
         # Run standard questioning
         return askUser(query,["Yes","No"])
 
-# Prints and retains a menu system based on provided information leaving the calling program to decide function
+# Prints and retains a menu system based on provided information leaving the calling program to decide function.
 # title -> The title of the menu
 # choices -> List of choice titles for the menu
 def presentTextMenu(title,choices):
@@ -69,3 +69,23 @@ def presentTextMenu(title,choices):
     
     # Ask user for choice and return
     return askUser("Choice",numberList,False)
+
+# Prints a text menu and handles input between an accompanied execution function all within a handled loop.
+# title -> The title of the menu
+# choices -> List of choice titles for the menu
+# lastOption -> Option to add to the last of the choices. Often 'Back' or 'Quit'
+# func -> The function to call within the script that calls this function that uses the data gathered from this function
+def textMenu(title,choices,lastOption,func):
+    # Prep answer choice
+    answer = None
+
+    # Add last option to choices
+    choices.append(lastOption)
+
+    # Enter main loop
+    while answer == None or answer != str(len(choices)-1):
+        # Present main menu and wait for input
+        answer = presentTextMenu(title,choices)
+
+        # Apply answer to main menu functions
+        func(answer)

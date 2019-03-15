@@ -75,19 +75,14 @@ def presentTextMenu(title,choices):
     return askUser("Choice",numberList,False)
 
 # Asks for user input while watching for an exit phrase that if entered returns a 'None' object.
-# query -> Question to ask the user for input on
-# exitPhrase -> String to listen for to indicate no response.
+# query -> Question to ask the user for input on. Has ": " appended to it
+# exitPhrase -> String to listen for to indicate no response
 def managedInput(query,exitPhrase):
-    # Check punctuation
-    punc = "."
-    if query[-1] == "." or query[-1] == "?" or query[-1] == "!":
-        punc = ""
-
     # Display query
-    print(str(query)+punc+"\nEnter '"+str(exitPhrase)+"' to "+(str(exitPhrase).lower())+".")
+    print("Enter '"+str(exitPhrase)+"' to "+(str(exitPhrase).lower())+".")
 
     # Ask user for input
-    answer = input("Input: ")
+    answer = input(query+": ")
 
     # Check if exit phrase
     if answer.lower() == exitPhrase.lower():

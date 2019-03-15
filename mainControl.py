@@ -13,7 +13,8 @@ def main():
     global MERCER
 
     # Startup Mercer in specified mode
-    MERCER = mercerControl.MERCER(utils.askUserYesNo("Start in Debug Mode?",True))
+    mode = utils.askUserYesNo("Start in Debug Mode?",True)
+    MERCER = mercerControl.MERCER(mode)
 
     # Welcome message
     print("\n<< Welcome to Mercer Main Control >>")
@@ -26,7 +27,7 @@ def main():
     MERCER.exitMercer()
 
     # Safe to exit message
-    print("Mercer has shutdown successfully.\nIt is now safe to close this window.")
+    print("\nMercer has shutdown successfully.\nIt is now safe to close this window.")
 
 # Functions for the main menu
 def mainMenuFunctions(answer):
@@ -53,12 +54,17 @@ def learningMenuFunctions(answer):
     if answer == "0":
         # Learn from File process
         # Get filename from user
-        fileName = utils.managedInput("Enter the filename here.","Cancel")
+        fileName = utils.managedInput("Enter the file path to the .txt file.","Cancel")
 
         # Check if response valid
         if fileName != None:
             # Learn from the file
-            pass
+            print("")
+            learned = MERCER.learnTextFile(fileName)
+
+            # Check if success
+            if not learned:
+                print("'"+fileName+"' could not be read.")
     elif answer == "1":
         # Learn from Subreddit process
         print(answer)

@@ -86,9 +86,15 @@ class MERCER:
                 for line in fileRead:
                     # Learn the line
                     self.learnTextBlock(line.strip("\n"))
+
+            # Return success
+            return True
         else:
             # Report file not found
             self.log("'"+file+"' does not exist.")
+
+            # Return failure
+            return False
 
     # Splits and learns each sentence from a block of sentences.
     # *This is generally the function you want to start with when learning text.*

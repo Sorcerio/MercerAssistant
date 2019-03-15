@@ -84,20 +84,35 @@ def learningMenuFunctions(answer):
                 if not learned:
                     print("/r/"+subreddit+" could not be read. Check the log for details.")
 
-# Functions for the learning menu
+# Functions for the generation menu
 def generationMenuFunctions(answer):
     # Indicate global
     global MERCER
 
     # Because Python Switch statements don't exist
     if answer == "0":
-        # Generate Sentece process
-        print(answer)
+        # Generate Sentence process
+        print("Generating Sentence.")
+        print(MERCER.createSentence(7))
     elif answer == "1":
         # Write to file process
-        print(answer)
+        # Ask where
+        path = utils.managedInput("Output file path","Cancel")
 
-# Functions for the learning menu
+        # Check if valid
+        if path != None:
+            # Ask for file length
+            length = utils.managedInputNumber("Max number of lines to generate","Cancel")
+
+            # Check if valid
+            if length != None:
+                # Generate the file
+                MERCER.writeTextToFile(length,7,path)
+
+                # Report done
+                print("File at '"+path+"' has been generated.")
+
+# Functions for the admin menu
 def adminMenuFunctions(answer):
     # Indicate global
     global MERCER

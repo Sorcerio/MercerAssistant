@@ -92,6 +92,41 @@ def managedInput(query,exitPhrase):
         # Send inputted answer
         return answer
 
+# Asks for user input while watching for an exit phrase that if entered.
+# Returns a 'None' object if canceled.
+# query -> Question to ask the user for input on. Has ": " appended to it
+# exitPhrase -> String to listen for to indicate no response
+def managedInputNumber(query,exitPhrase):
+    # Enter validation loop
+    answer = None
+    goodNumber = False
+    while not goodNumber:
+        # Get managed input
+        answer = managedInput(query,exitPhrase)
+
+        # Check if valid
+        if answer != None:
+            # Attempt to convert to int
+            try:
+                # Convert to number
+                answer = int(answer)
+
+                # Exit loop
+                goodNumber = True
+                break
+            except ValueError as err:
+                # Tell user to fix it
+                print("'"+str(answer)+"' is not a number.")
+        else:
+            # Canceled, break loop
+            break
+
+    # Check final verdict
+    if goodNumber:
+        return answer
+    else:
+        return None
+
 # Prints a text menu and handles input between an accompanied execution function all within a handled loop.
 # title -> The title of the menu
 # choices -> List of choice titles for the menu

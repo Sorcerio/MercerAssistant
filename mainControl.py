@@ -54,7 +54,7 @@ def learningMenuFunctions(answer):
     if answer == "0":
         # Learn from File process
         # Get filename from user
-        fileName = utils.managedInput("Enter the file path to the .txt file.","Cancel")
+        fileName = utils.managedInput("Enter the file path to the .txt file","Cancel")
 
         # Check if response valid
         if fileName != None:
@@ -67,7 +67,22 @@ def learningMenuFunctions(answer):
                 print("'"+fileName+"' could not be read.")
     elif answer == "1":
         # Learn from Subreddit process
-        print(answer)
+        # Get subreddit
+        subreddit = utils.managedInput("Enter the subreddit to skim","Cancel")
+
+        # Check if valid
+        if subreddit != None:
+            # Get the post limit
+            postLimit = utils.managedInputNumber("Max number of posts to read in /r/"+subreddit,"Cancel")
+
+            # Check if valid
+            if postLimit != None:
+                # Learn from the subreddit
+                learned = MERCER.learnFromSubReddit(postLimit,subreddit)
+
+                # Check if success
+                if not learned:
+                    print("/r/"+subreddit+" could not be read. Check the log for details.")
 
 # Functions for the learning menu
 def generationMenuFunctions(answer):

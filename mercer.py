@@ -366,9 +366,15 @@ class MERCER:
                     else:
                         # Log empty thing
                         self.log("'"+post.title+"' had no body text. Ignoring.")
+
+            # Return success
+            return True
         else:
             # praw not imported
             self.log("'praw' was not imported. Reddit features are disabled.")
+
+            # Return failure
+            return False
 
     # Accesses and converts to an element tree a specified RSS Feed (or web page)
     # Returns 'None' if the proper imports are not avalible

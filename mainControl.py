@@ -8,11 +8,11 @@ import generalUtilities as utils
 
 # Main Thread
 def main():
-    # Welcome message
-    print("Welcome to Mercer Main Control.\n")
-
     # Startup Mercer in specified mode
     mercer = mercerControl.MERCER(utils.askUserYesNo("Start in Debug Mode?",True))
+
+    # Welcome message
+    print("\n<< Welcome to Mercer Main Control >>")
 
     # Enter menu functions
     options = ["Learning Menu","Generation Menu","Administration Menu"]
@@ -21,30 +21,57 @@ def main():
     # Exit Mercer safely
     mercer.exitMercer()
 
-# Functions of the options in the main menu
+# Functions for the main menu
 def mainMenuFunctions(answer):
     # Because Python Switch statements don't exist
     if answer == "0":
         # Open Learning Menu
-        learningMenu()
+        options = ["Learn from File","Learn from Subreddit"]
+        utils.textMenu("Learning Menu",options,"Back",learningMenuFunctions)
     elif answer == "1":
         # Open Generation Menu
-        generationMenu()
+        options = ["Generate Sentence","Write to File"]
+        utils.textMenu("Generation Menu",options,"Back",generationMenuFunctions)
     elif answer == "2":
         # Open Admin Menu
-        adminMenu()
+        options = ["Log Dictionary","Show Dictionary Statistics","Toggle Debug Mode","Set Max Generation Attempts"]
+        utils.textMenu("Administration Menu",options,"Back",adminMenuFunctions)
 
-# Ask for information in the Learning Menu
-def learningMenu():
-    print("Learning Menu!")
+# Functions for the learning menu
+def learningMenuFunctions(answer):
+    # Because Python Switch statements don't exist
+    if answer == "0":
+        # Learn from File process
+        print(answer)
+    elif answer == "1":
+        # Learn from Subreddit process
+        print(answer)
 
-# Ask for information in the Learning Menu
-def generationMenu():
-    print("Gen Menu!")
+# Functions for the learning menu
+def generationMenuFunctions(answer):
+    # Because Python Switch statements don't exist
+    if answer == "0":
+        # Generate Sentece process
+        print(answer)
+    elif answer == "1":
+        # Write to file process
+        print(answer)
 
-# Ask for information in the Learning Menu
-def adminMenu():
-    print("Admin Menu!")
+# Functions for the learning menu
+def adminMenuFunctions(answer):
+    # Because Python Switch statements don't exist
+    if answer == "0":
+        # Log dictionary process
+        print(answer)
+    elif answer == "1":
+        # Show dictionary statistics process
+        print(answer)
+    elif answer == "1":
+        # Show toggle debug mode process
+        print(answer)
+    elif answer == "1":
+        # Show set max generation attempts process
+        print(answer)
 
 # Execute Main Thread
 main()

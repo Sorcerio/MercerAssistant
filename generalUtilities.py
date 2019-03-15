@@ -1,6 +1,10 @@
 # General Utilities for Python [Maximombro/Brody Childs]
 # Allows ease of use though providing generalized methods for commonly used Python code blocks.
 
+# Configuration
+TITLE_MARKER_LEFT = "["
+TITLE_MARKER_RIGHT = "]"
+
 # Methods
 # Ask the user to input a valid answer and returns the choice once answered.
 # query -> String to ask the user. Has ": " appened to its end
@@ -49,7 +53,7 @@ def askUserYesNo(query,boolean = False):
 # choices -> List of choice titles for the menu
 def presentTextMenu(title,choices):
     # Print title
-    print(title)
+    print(TITLE_MARKER_LEFT+" "+title+" "+TITLE_MARKER_RIGHT)
 
     # Print Menu
     index = 0
@@ -85,7 +89,14 @@ def textMenu(title,choices,lastOption,func):
     # Enter main loop
     while answer == None or answer != str(len(choices)-1):
         # Present main menu and wait for input
+        print("")
         answer = presentTextMenu(title,choices)
 
         # Apply answer to main menu functions
         func(answer)
+
+# Example of the method the 'textMenu()' function is looking for in the 'func' parameter.
+# This can be used as a template and for learning to understand the process of the 'textMenu()' function.
+def textMenuFunctions(answer):
+    # Print the returned answer
+    print("textMenu: "+str(answer))

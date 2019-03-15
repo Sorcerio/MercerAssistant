@@ -8,10 +8,17 @@ import generalUtilities as utils
 
 # Main Thread
 def main():
-    a = utils.askUser("What's the answer dog?",["Answer1","AnSwEr2","REAOR","wow"])
-    print(a)
-    b = utils.askUserYesNo("What that bool?",True)
-    print(b)
+    # Welcome message
+    print("Welcome to Mercer Main Control.\n")
+
+    # Startup Mercer in specified mode
+    mercer = mercerControl.MERCER(utils.askUserYesNo("Start in Debug Mode?",True))
+
+    # Present main menu
+    utils.presentTextMenu("Mercer Main Menu",["Option A","Option B","Option C","Quit"])
+
+    # Exit Mercer safely
+    mercer.exitMercer()
 
 # Execute Main Thread
 main()

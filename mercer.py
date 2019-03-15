@@ -1,4 +1,5 @@
 # MERCER Control System
+# By: Brody Childs/Maximombro
 
 # Imports
 import os

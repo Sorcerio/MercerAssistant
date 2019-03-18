@@ -490,7 +490,11 @@ class MERCER:
     ## Assistant Methods
     # Switch the debug mode
     def setDebug(self,isOn):
+        # Set debug mode
         self.debugMode = isOn
+
+        # Log
+        self.log("Set Debug Mode to "+str(isOn)+".")
 
     # Logs the dictionary to the console
     def logDictionary(self):
@@ -504,6 +508,9 @@ class MERCER:
 
         # Set attempts
         MAX_ATTEMPTS = attempts
+
+        # Log
+        self.log("Set Max Generation Attempts to "+str(attempts)+".")
 
     # Logs to the console and, if debug is on, to the debug log file
     def log(self,text):
@@ -633,5 +640,8 @@ class MERCER:
 
             # Set amount
             MAX_COMMONALITY_DIFFERENCE = amount
+
+            # Log
+            self.log("Set Max Commonality Difference to top "+str(amount)+"%.")
         except TypeError as err:
             self.log(str(amount)+" is not a valid amount to set the Max Commonality Difference to.")

@@ -19,9 +19,11 @@ DICTIONARY_FILE = "dictionary.mercer" # Name of the dictionary file
 LOG_FILE = "mercerDebugLog.txt" # Name of the Debug log file
 LOG_TAG = "Mercer" # Tag to put before Mercer system messages
 NONE_TAG = "<NONE>" # Tag to denote when a string does not exist
-ADJ_TAG = "Adj" # Tag to denote when a word is a Adjective
-NOUN_TAG = "Noun" # Tag to denote when a word is a Noun
-VERB_TAG = "Verb" # Tag to denote when a word is a Verb
+WORD_TYPE_TAGS = { # Tags to denote when a word is appropritate type. Format: [Type Name : Tag]
+    "adjective":"Adj",
+    "noun":"Noun",
+    "verb":"Verb"
+}
 MAX_ATTEMPTS = 10 # The maximum amount of attempts for various generations
 MAX_COMMONALITY_DIFFERENCE = 3 # The maximum distance that a word can be from the most common recorded in terms of commonality
 MIN_WORDS_IN_SENTENCE = 4 # The minimum number of words to be used in a sentence
@@ -440,6 +442,20 @@ class MERCER:
     #                 # Iterate
     #                 i += 1
 
+    # Sets the type of the specified word within the dictionary
+    def setWordType(self,word,wordType):
+        # Check if type is a valid type
+        if wordType in WORD_TYPE_TAGS or wordType == NONE_TAG:
+            # Make sure word is in dictionary
+            if word in self.dictionary:
+                pass
+            else:
+                # Log word does not exist failure
+                self.log(str(word)+" is not in the dictionary.")
+        else:
+            # Word type is not valid
+            self.log(str(wordType)+" is not a valid type of word.")
+
     ## Assistant Methods
     # Switch the debug mode
     def setDebug(self,isOn):
@@ -505,9 +521,9 @@ class MERCER:
 
         # Prep most common type
         typeCounter = {
-            NOUN_TAG: 0,
-            ADJ_TAG: 0,
-            VERB_TAG: 0,
+            WORD_TYPE_TAGS['noun']: 0,
+            WORD_TYPE_TAGS['adjective']: 0,
+            WORD_TYPE_TAGS['verb']: 0,
             NONE_TAG: 0
         }
 
@@ -527,23 +543,26 @@ class MERCER:
         # Check mode
         if shouldPrint:
             # Print mode
-            # Print the data
+            # Print the title
             print("Dictionary Statistics:")
-            print("Total Word Count: "+str(wordCount)+",")
-            print("Noun Count: "+str(typeCounter[NOUN_TAG])+",")
-            print("Adjective Count: "+str(typeCounter[ADJ_TAG])+",")
-            print("Verb Count: "+str(typeCounter[VERB_TAG])+",")
+
+            # Print the word count
+            print("Total Word Count: "+str(wordCount))
+
+            # Print the data
+            for wordType in WORD_TYPE_TAGS:
+                print(wordType.capitalize()+" Count:"+str(typeCounter[WORD_TYPE_TAGS[wordType]]))
+
+            # Print unknown
             print("Unknown Count: "+str(typeCounter[NONE_TAG]))
 
             # Return blank
             return None
         else:
             # Return mode
-            # Translate
-            typeCounter['Nouns'] = typeCounter.pop(NOUN_TAG)
-            typeCounter['Adjectives'] = typeCounter.pop(ADJ_TAG)
-            typeCounter['Verbs'] = typeCounter.pop(VERB_TAG)
-            typeCounter['Unknown'] = typeCounter.pop(NONE_TAG)
+            # Translate data
+            for wordType in WORD_TYPE_TAGS:
+                typeCounter[wordType.capitalize()] = typeCounter.pop(WORD_TYPE_TAGS[wordType])
 
             # Build Dictionary
             outData = {

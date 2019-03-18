@@ -38,7 +38,7 @@ def mainMenuFunctions(answer):
         utils.textMenu("Learning Menu",options,"Back to Main Menu",learningMenuFunctions)
     elif answer == "1":
         # Open Generation Menu
-        options = ["Generate Sentence","Write to File"]
+        options = ["Generate Sentence","Write to File","Manually Set Word Type"]
         utils.textMenu("Generation Menu",options,"Back to Main Menu",generationMenuFunctions)
     elif answer == "2":
         # Open Admin Menu
@@ -111,6 +111,41 @@ def generationMenuFunctions(answer):
 
                 # Report done
                 print("File at '"+path+"' has been generated.")
+    elif answer == "2":
+        # Manually set word type process
+        # Ask for word
+        word = utils.managedInput("Word to modify","Cancel")
+
+        # Check if valid
+        if word != None:
+            # Build list of type options
+            options = []
+            for wordType in MERCER.getWordTypeTags():
+                options.append(wordType.capitalize())
+            
+            # Add None option
+            options.append("Unknown")
+
+            # Add cancel option
+            options.append("Cancel")
+
+            # Ask user to choose one
+            wordType = utils.askUser("What should the type be?",options)
+
+            # Check if canceled
+            if wordType != "Cancel":
+                # Switch unknown tag
+                if wordType == "Unknown":
+                    wordType = MERCER.getNoneTag()
+
+                # Set type
+                success = MERCER.setWordType(word.lower(),wordType)
+
+                # Check success
+                if success:
+                    print("'"+word+"' was successfully changed to a '"+wordType+"' type word.")
+                else:
+                    print("Word type could not be changed. Check the log for details.")
 
 # Functions for the admin menu
 def adminMenuFunctions(answer):

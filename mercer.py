@@ -445,16 +445,26 @@ class MERCER:
     # Sets the type of the specified word within the dictionary
     def setWordType(self,word,wordType):
         # Check if type is a valid type
-        if wordType in WORD_TYPE_TAGS or wordType == NONE_TAG:
+        if wordType.lower() in WORD_TYPE_TAGS or wordType == NONE_TAG:
             # Make sure word is in dictionary
             if word in self.dictionary:
-                pass
+                # Set the type
+                self.dictionary[word]['type'] = wordType
+
+                # Return success
+                return True
             else:
                 # Log word does not exist failure
                 self.log(str(word)+" is not in the dictionary.")
+
+                # Return failure
+                return False
         else:
             # Word type is not valid
             self.log(str(wordType)+" is not a valid type of word.")
+
+            # Return failure
+            return False
 
     ## Assistant Methods
     # Switch the debug mode
@@ -572,3 +582,13 @@ class MERCER:
 
             # Return data
             return outData
+    
+    # Gets the dict of word types
+    def getWordTypeTags(self):
+        global WORD_TYPE_TAGS
+        return WORD_TYPE_TAGS
+
+    # Gets the NONE_TAG
+    def getNoneTag(self):
+        global NONE_TAG
+        return NONE_TAG

@@ -8,6 +8,7 @@ import random
 import importlib
 from importlib import util as importlibutil
 import datetime
+import math
 
 # Optional Imports Setup
 praw = None # For Reddit connections (pip install praw)
@@ -25,7 +26,7 @@ WORD_TYPE_TAGS = { # Tags to denote when a word is appropritate type. Format: [T
     "verb":"Verb"
 }
 MAX_ATTEMPTS = 10 # The maximum amount of attempts for various generations
-MAX_COMMONALITY_DIFFERENCE = 3 # The maximum distance that a word can be from the most common recorded in terms of commonality
+MAX_COMMONALITY_DIFFERENCE = 25 # What percentage (1 to 100) from the top of a word's commonality list should be considered when generating sentences
 MIN_WORDS_IN_SENTENCE = 4 # The minimum number of words to be used in a sentence
 
 # The MERCER Class structure
@@ -322,10 +323,30 @@ class MERCER:
                 # Add to the commonality list
                 commonalities[part["occurances"]].append(part["word"])
 
+            # Get highest commonality
+            highestCommonality = max(list(commonalities.keys()))
+
+            # Calculate minimum commonality
+            minCommoness = math.floor(highestCommonality-(highestCommonality*(MAX_COMMONALITY_DIFFERENCE/100)))
+
+            # Ensure at least one
+            if minCommoness < 1:
+                minCommoness = 1
+
+            # Trim commonalities to only avalible keys
+            validKeys = []
+            for key in list(commonalities.keys()):
+                # Check if key is higher than min
+                if key >= minCommoness:
+                    validKeys.append(key)
+
+            # Log the keys
+            self.log("Using "+str(len(validKeys))+"/"+str(len(list(commonalities.keys())))+" options for word to follow '"+str(leadingWord)+"'.")
+
             # Return none on Index Errors
             try:
                 # Choose commonality
-                commonKey = random.choice(list(commonalities.keys()))
+                commonKey = random.choice(validKeys)
 
                 # Pick and return word
                 return commonalities[commonKey][random.randint(0,(len(commonalities[commonKey])-1))]

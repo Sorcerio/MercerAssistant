@@ -127,6 +127,30 @@ def managedInputNumber(query,exitPhrase):
     else:
         return None
 
+def managedInputNumberRange(query,maxNumber,minNumber,exitPhrase):
+    # Enter validation loop
+    answer = None
+    withinRange = False
+    while not withinRange:
+        # Get input
+        answer = managedInputNumber(query,exitPhrase)
+
+        # Check if valid
+        if answer != None:
+            # Check if within range
+            if answer <= maxNumber and answer >= minNumber:
+                # Within range
+                withinRange = True
+        else:
+            # Canceled, break loop
+            break
+    
+    # Final check
+    if withinRange:
+        return answer
+    else:
+        return None
+
 # Prints a text menu and handles input between an accompanied execution function all within a handled loop.
 # title -> The title of the menu
 # choices -> List of choice titles for the menu

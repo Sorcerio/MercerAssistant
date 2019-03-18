@@ -42,7 +42,7 @@ def mainMenuFunctions(answer):
         utils.textMenu("Generation Menu",options,"Back to Main Menu",generationMenuFunctions)
     elif answer == "2":
         # Open Admin Menu
-        options = ["Log Dictionary","Show Dictionary Statistics","Toggle Debug Mode","Set Max Generation Attempts"]
+        options = ["Log Dictionary","Show Dictionary Statistics","Toggle Debug Mode","Set Max Generation Attempts","Set Max Commonality Difference"]
         utils.textMenu("Administration Menu",options,"Back to Main Menu",adminMenuFunctions)
 
 # Functions for the learning menu
@@ -186,9 +186,31 @@ def adminMenuFunctions(answer):
         # Check
         minLimit = 1
         if maxNum != None and maxNum >= minLimit:
+            # Set max generation attempts
             MERCER.setMaxGenerationAttempts(maxNum)
+
+            # Report
+            print("Set max generation attempts to "+str(maxNum)+".")
         elif maxNum < minLimit:
+            # Report
             print(str(minLimit)+" is minimum max generation attempts that can be set.")
+    elif answer == "4":
+        # Set max commonality difference process
+        # Notes
+        print("Higher numbers will allow more words to be considered as options under most circumstances.")
+        print("Max commonality difference is currently set to top "+str(MERCER.getMaxCommonalityDifference())+"%.")
+
+        # Get number
+        amount = utils.managedInputNumberRange("Set max commonality difference to",100,1,"Cancel")
+
+        # Check
+        if amount != None:
+            # Set number
+            MERCER.setMaxCommonalityDifference(amount)
+
+            # Report
+            print("Set max commonality difference to top "+str(amount)+"%.")
+
 
 # Execute Main Thread
 main()

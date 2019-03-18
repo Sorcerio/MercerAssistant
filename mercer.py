@@ -26,7 +26,7 @@ WORD_TYPE_TAGS = { # Tags to denote when a word is appropritate type. Format: [T
     "verb":"Verb"
 }
 MAX_ATTEMPTS = 10 # The maximum amount of attempts for various generations
-MAX_COMMONALITY_DIFFERENCE = 25 # What percentage (1 to 100) from the top of a word's commonality list should be considered when generating sentences
+MAX_COMMONALITY_DIFFERENCE = 75 # What percentage (1 to 100) from the top of a word's commonality list should be considered when generating sentences
 MIN_WORDS_IN_SENTENCE = 4 # The minimum number of words to be used in a sentence
 
 # The MERCER Class structure
@@ -613,3 +613,25 @@ class MERCER:
     def getNoneTag(self):
         global NONE_TAG
         return NONE_TAG
+
+    # Gets the Max Commonality Difference
+    def getMaxCommonalityDifference(self):
+        global MAX_COMMONALITY_DIFFERENCE
+        return MAX_COMMONALITY_DIFFERENCE
+
+    def setMaxCommonalityDifference(self,amount):
+        # Establish global
+        global MAX_COMMONALITY_DIFFERENCE
+
+        # Asking forgiveness is the Python way
+        try:
+            # Make sure within bounds
+            if amount > 100:
+                amount = 100
+            if amount < 1:
+                amount = 1
+
+            # Set amount
+            MAX_COMMONALITY_DIFFERENCE = amount
+        except TypeError as err:
+            self.log(str(amount)+" is not a valid amount to set the Max Commonality Difference to.")

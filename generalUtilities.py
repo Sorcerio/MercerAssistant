@@ -174,6 +174,50 @@ def textMenu(title,choices,lastOption,func):
 
 # Example of the method the 'textMenu()' function is looking for in the 'func' parameter.
 # This can be used as a template and for learning to understand the process of the 'textMenu()' function.
-def textMenuFunctions(answer):
+def exampleTextMenuFunction(answer):
     # Print the returned answer
     print("textMenu: "+str(answer))
+
+# Prints a text menu and handles input between an accompanied execution function all within a handled loop.
+# title -> The title of the menu
+# choices -> List of choice titles for the menu
+# lastOption -> Option to add to the last of the choices. Often 'Back' or 'Quit'
+# func -> The function to call within the script that calls this function that uses the data gathered from this function
+def textMenuWithPackage(title,choices,lastOption,func,package):
+    # Prep answer choice
+    answer = None
+
+    # Add last option to choices
+    choices.append(lastOption)
+
+    # Enter main loop
+    while answer == None or answer != str(len(choices)-1):
+        # Present main menu and wait for input
+        print("")
+        answer = presentTextMenu(title,choices)
+
+        # Apply answer to main menu functions
+        func(answer,package)
+
+# Example of the method the 'textMenuWithPackage()' function is looking for in the 'func' parameter.
+# This can be used as a template and for learning to understand the process of the 'textMenuWithPackage()' function.
+def exampleTextMenuWithPackageFunction(answer,package):
+    # Print the returned answer
+    print("textMenu w/ package: "+str(answer)+" w/ "+str(package))
+
+# Reads the entire contents of a file to memory and returns the content as a lumpsum string (good for JSON files, etc).
+# fileName -> Name (or full address path if not in the working directory) of the file to read
+def readFullFile(fileName):
+    # Open the file
+    with open(fileName, "r") as rFile:
+        # Read and return the data
+        return rFile.read()
+
+# Writes the entire contents of the supplied text to the specified tile (good for JSON files, etc).
+# fileName -> Name (or full address path if not in the working directory) of the file to write to. Be sure to include the file extension
+# text -> The text to write to the file in one pass (can include new line, tab, etc characters)
+def writeFullFile(fileName, text):
+    # Open the file
+    with open(fileName, "w") as wFile:
+        # Write the text out
+        wFile.write(text)

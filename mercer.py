@@ -326,7 +326,7 @@ class MERCER:
         cleanWord = cleanWord.replace(".", " ")
 
         # Check for personal I
-        if " i " in cleanWord:
+        if cleanWord == "i":
             cleanWord = "I"
 
         # Send the cleaned one

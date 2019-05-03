@@ -329,6 +329,19 @@ class MERCER:
         if cleanWord == "i":
             cleanWord = "I"
 
+        # Check if word got compounded
+        if len(cleanWord.split(" ")) > 1:
+            # Split the clean word
+            splitWord = cleanWord.split(" ")
+
+            # Clear cleanWord
+            cleanWord = ""
+
+            # Loop through the compounded word
+            for word in splitWord:
+                # Clean the split word
+                cleanWord += (" "+self.cleanWord(word))
+
         # Send the cleaned one
         return cleanWord
 

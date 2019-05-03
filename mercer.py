@@ -9,6 +9,7 @@ import importlib
 from importlib import util as importlibutil
 import datetime
 import math
+import re
 
 # Optional Imports Setup
 praw = None # For Reddit connections (pip install praw)
@@ -281,7 +282,7 @@ class MERCER:
         seed = list(self.dictionary.keys())[random.randint(0,len(self.dictionary))]
 
         # Add seed to sentence
-        sentence = seed
+        sentence = self.cleanWord(seed)
 
         # Attempt to reach max length of words
         lastWord = seed
@@ -294,7 +295,7 @@ class MERCER:
                 # Check if word was found
                 if newWord != NONE_TAG and newWord != None:
                     # Add to sentence
-                    sentence = (sentence+" "+newWord)
+                    sentence = (sentence+" "+self.cleanWord(newWord))
                     lastWord = newWord
                     
                     # Break out
@@ -303,8 +304,27 @@ class MERCER:
         # Log finish
         self.log("Sentence created.")
 
-        # Return sentence
-        return (sentence.capitalize()+".")
+        # Return the formated sentence
+        return (sentence[0].capitalize()+sentence[1:]+".")
+
+    # Ensures that a word fits the print standard and corrects capitolization on personal Is
+    def cleanWord(self,word):
+        # Prepare clean word
+        cleanWord = ""
+
+        # Remove Unicode characters
+        cleanWord = re.sub(r'[^\x00-\x7f]', r'', word)
+
+        # Remove bad tags
+        cleanWord = cleanWord.replace("\n","")
+        cleanWord = cleanWord.replace("\t","")
+
+        # Check for personal I
+        if cleanWord == "i":
+            cleanWord = "I"
+
+        # Send the cleaned one
+        return cleanWord
 
     # Attempts to find a word that follows the leading word
     def chooseWordToFollow(self,leadingWord):

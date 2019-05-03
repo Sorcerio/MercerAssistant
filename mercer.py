@@ -318,9 +318,15 @@ class MERCER:
         # Remove bad tags
         cleanWord = cleanWord.replace("\n","")
         cleanWord = cleanWord.replace("\t","")
+        
+        # Remove bad characters
+        exclusionList = ["(", ")", "[", "]", "{", "}", "\"", "'", "*"]
+        for exChar in exclusionList:
+            cleanWord = cleanWord.replace(exChar,"")
+        cleanWord = cleanWord.replace(".", " ")
 
         # Check for personal I
-        if cleanWord == "i":
+        if " i " in cleanWord:
             cleanWord = "I"
 
         # Send the cleaned one

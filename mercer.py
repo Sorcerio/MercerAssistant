@@ -320,7 +320,7 @@ class MERCER:
         cleanWord = cleanWord.replace("\t","")
         
         # Remove bad characters
-        exclusionList = ["(", ")", "[", "]", "{", "}", "\"", "'", "*"]
+        exclusionList = ["(", ")", "[", "]", "{", "}", "\"", "'", "*", "<", ">"]
         for exChar in exclusionList:
             cleanWord = cleanWord.replace(exChar,"")
         cleanWord = cleanWord.replace(".", " ")

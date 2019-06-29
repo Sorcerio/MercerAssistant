@@ -38,7 +38,7 @@ def mainMenuFunctions(answer):
         utils.textMenu("Learning Menu",options,"Back to Main Menu",learningMenuFunctions)
     elif answer == "1":
         # Open Generation Menu
-        options = ["Generate Sentence","Write to File","Manually Set Word Type"]
+        options = ["Generate Sentence","Write to File","Write to Console","Manually Set Word Type"]
         utils.textMenu("Generation Menu",options,"Back to Main Menu",generationMenuFunctions)
     elif answer == "2":
         # Open Admin Menu
@@ -112,6 +112,17 @@ def generationMenuFunctions(answer):
                 # Report done
                 print("File at '"+path+"' has been generated.")
     elif answer == "2":
+        # Write to console process
+        # Ask for file length
+        length = utils.managedInputNumber("Max number of lines to generate","Cancel")
+
+        # Check if valid
+        if length != None:
+            # Print to the console
+            print("------------------")
+            print(MERCER.writeText(length,7))
+            print("------------------")
+    elif answer == "3":
         # Manually set word type process
         # Ask for word
         word = utils.managedInput("Word to modify","Cancel")
